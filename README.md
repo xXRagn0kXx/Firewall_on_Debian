@@ -499,6 +499,7 @@ donde se encuentran tus sets en el fichero /etc/crowdsec/bouncers/crowdsec-firew
 * En deny_log lo cambiaremos de "false" a "true" y mas abajo descomentamos deny_log_prefix y lo personalizamos con " [(CrowdSec BLOCK)]: "
 * En el apartado de blacklists es importante especificar los set de blacklists creadas para CrowdSec en nuestro /etc/nftables.conf (crowdsec-blacklist-ipv4 y crowdsec-blacklist-ipv6)
 * En el apartado  ## nftables del fichero debemos modificar los valores "table" y "chain" con "filter" e "input" tal y como hemos puesto nuestro fichero /etc/nftables.conf tanto para el apartado IPv4 como IPv6.
+* En el apartado set-only: false, lo pondremos true, ya que hemos creado la chain ordenada en nuestro nftables ya funcionanado
 
  ```bash
 sudo   nano /etc/crowdsec/bouncers/crowdsec-firewall-bouncer.yaml
@@ -518,13 +519,13 @@ blacklists_ipv6: crowdsec-blacklists-ipv6
 nftables:
   ipv4:
     enabled: true
-    set-only: false
+    set-only: true
     table: filter
     chain: input
     priority: -10
   ipv6:
     enabled: true
-    set-only: false
+    set-only: true
     table: filter
     chain: input
     priority: -10
