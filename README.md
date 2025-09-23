@@ -534,7 +534,7 @@ nftables:
 Para aplicar todos los cambios se apliquen, reinicia los servicios de CrowdSec y del bouncer:
   ```bash
 sudo systemctl restart crowdsec
-sudo systemctl restart crowdsec-firewall-bouncer-nftables
+sudo systemctl restart crowdsec-firewall-bouncer
 ```
 Suele tardar un minuto hasta que estabiliza todo.
 
