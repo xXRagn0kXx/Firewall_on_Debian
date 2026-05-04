@@ -539,22 +539,6 @@ sudo systemctl restart crowdsec-firewall-bouncer
 ```
 Suele tardar un minuto hasta que erranca y conecta con la API
 
-⚠️ Si falla el parser SSH editar /etc/crowdsec/parsers/s01-parse/sshd-logs.yaml:
-  ```bash
-Original filter:
-
-filter: "evt.Parsed.program in ['sshd', 'sshd-session']"
-
-Reemplazar con:
-  filter: "evt.Line.Labels.type == 'syslog' && evt.Line.Raw contains 'sshd-session'"
-```
-
- Recargar servicio:
-
-```bash
- systemctl restart crowdsec
-```
-
 :white_check_mark: ¡¡Ya estaria todo!! Ahora el siguiente apartado consiste comprobaciones para asegurarnos de que esten todos los servicios corriendo y activos.
 
 # :ballot_box_with_check: 4 Verificacion y Monitorizacion
@@ -665,6 +649,22 @@ Comprobar que el Bouncer Firewall de CrowdSec para nftables actualiza las decisi
 
 ```bash 
 sudo cat /var/log/crowdsec-firewall-bouncer.log
+```
+
+⚠️ Si falla el parser SSH editar /etc/crowdsec/parsers/s01-parse/sshd-logs.yaml:
+  ```bash
+Original filter:
+
+filter: "evt.Parsed.program in ['sshd', 'sshd-session']"
+
+Reemplazar con:
+  filter: "evt.Line.Labels.type == 'syslog' && evt.Line.Raw contains 'sshd-session'"
+```
+
+ Recargar servicio:
+
+```bash
+ systemctl restart crowdsec
 ```
 
 Muchas mejoras estan tambien bastionando el sysctl.conf
