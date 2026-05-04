@@ -538,6 +538,21 @@ sudo systemctl restart crowdsec
 sudo systemctl restart crowdsec-firewall-bouncer
 ```
 Suele tardar un minuto hasta que estabiliza todo.
+⚠️ Si falla el parser SSH editar /etc/crowdsec/parsers/s01-parse/sshd-logs.yaml:
+  ```bash
+Original filter:
+
+filter: "evt.Parsed.program in ['sshd', 'sshd-session']"
+
+Reemplazar con:
+  filter: "evt.Line.Labels.type == 'syslog' && evt.Line.Raw contains 'sshd-session'"
+```
+
+ Recargar servicio:
+
+```bash
+ systemctl restart crowdsec
+```
 
 :white_check_mark: ¡¡Ya estaria todo!! Ahora el siguiente apartado consiste comprobaciones para asegurarnos de que esten todos los servicios corriendo y activos.
 
